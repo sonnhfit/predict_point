@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from student.views import DemoView
+from student.views import IndexView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', DemoView.as_view())
+    path('', IndexView.as_view())
 ]
