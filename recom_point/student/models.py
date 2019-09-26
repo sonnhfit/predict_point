@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
@@ -17,14 +17,15 @@ class Lop(models.Model):
     nganh = models.ForeignKey(Nganh, on_delete=255)
     khoa_dao_tao = models.IntegerField(default=0)
 
-class SinhVien(models.Model):
+
+class SinhVien(AbstractUser):
     masv = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     gioi_tinh = models.BooleanField(default=False)
     ngaysinh = models.DateField(auto_now=True)
     dia_chi = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
-    lop = models.ForeignKey(Lop, on_delete=models.CASCADE)
+    lop = models.ForeignKey(Lop, on_delete=models.CASCADE, null=True, blank=True)
 
 class HocPhan(models.Model):
     ten_hp = models.CharField(max_length=255)
@@ -35,3 +36,12 @@ class HocPhan(models.Model):
 
 class ChuongTrinhDaoTao(models.Model):
     mahp = models.ForeignKey(HocPhan, on_delete=models.CASCADE)
+    manganh = models.ForeignKey(Nganh, on_delete=models.CASCADE)
+    makhoa = models.ForeignKey(Khoa, on_delete=models.CASCADE)
+
+
+class Diem(models.Model):
+    hocky = models.IntegerField(default=0)
+    hocphan = models.ForeignKey(ChuongTrinhDaoTao, on_delete=models.CASCADE)
+    sinhvien = models.ForeignKey(SinhVien, on_delete=models.CASCADE)
+    diem = models.FloatField(default=0)
