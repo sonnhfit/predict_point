@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .utils import convert_diem_so_thanh_diem_chu
 # Create your models here.
 
 
@@ -43,6 +44,11 @@ class ChuongTrinhDaoTao(models.Model):
 
 class Diem(models.Model):
     hocky = models.IntegerField(default=0)
-    hocphan = models.ForeignKey(ChuongTrinhDaoTao, on_delete=models.CASCADE)
+    ctdt = models.ForeignKey(ChuongTrinhDaoTao, on_delete=models.CASCADE, default=None, blank=True)
+    hocphan = models.ForeignKey(HocPhan, on_delete=models.CASCADE, default=None, blank=True)
     sinhvien = models.ForeignKey(SinhVien, on_delete=models.CASCADE)
     diem = models.FloatField(default=0)
+
+    @property
+    def get_diem_chu(self):
+        return convert_diem_so_thanh_diem_chu(self.diem)

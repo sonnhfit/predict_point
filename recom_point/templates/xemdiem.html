@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Bảng điểm
+                </h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Học kỳ</th>
+                      <th>Học phần</th>
+                      <th>Điểm số</th>
+                      <th>Điểm chữ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in data %}
+                    <tr>
+                        <td></td>
+                        <td>{{ item.hocky }}</td>
+                      <td>{{ item.hocphan.ten_hp }}</td>
+
+                      <td>{{ item.diem }}</td>
+                        <td>{{ item.get_diem_chu }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

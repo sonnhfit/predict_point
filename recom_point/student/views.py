@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import ChuongTrinhDaoTao
+from .models import ChuongTrinhDaoTao, Diem
 # Create your views here.
 
 
@@ -47,3 +47,13 @@ class XemChuongTrinhDaoTao(View):
             'nganh': ma_nganh
         }
         return render(request, 'xemchuongtrinhdaotao.html', context)
+
+
+class XemDiemView(View):
+
+    def get(self, request):
+        data = Diem.objects.filter(sinhvien=request.user)
+        context = {
+            'data': data
+        }
+        return render(request, 'xemdiem.html', context)
