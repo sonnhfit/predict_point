@@ -38,6 +38,7 @@ class ChuongTrinhDaoTao(models.Model):
     mahp = models.ForeignKey(HocPhan, on_delete=models.CASCADE)
     manganh = models.ForeignKey(Nganh, on_delete=models.CASCADE)
     makhoa = models.ForeignKey(Khoa, on_delete=models.CASCADE)
+    tuchon = models.BooleanField(default=False, blank=True, null=True)
 
 
 class Diem(models.Model):

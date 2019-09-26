@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-6">
+        <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Chương trình đào tạo</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Ngành học</label>
+                    <div class="col-sm-10">
+                      <input type="" value="{{ nganh.ten_nganh }}" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Hệ đào tạo</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" value="Đại học" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                     <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Mã ngành</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" value="{{ nganh.id }}" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                     <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Khoa</label>
+                    <div class="col-sm-10">
+                      <input value="{{ nganh.khoa.ten_khoa }}" type="" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+    </div>
+    <div class="col-6">
+
+    </div>
+
+</div>
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Chương trình đào tạo
+                </h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Mã học phần</th>
+                      <th>Tên học phần</th>
+                      <th>Số tín chỉ</th>
+                      <th>Số Tiết LT</th>
+                      <th>Số Tiết TH</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in data %}
+                    <tr>
+                        <td>{{ item.mahp.id }}</td>
+                      <td>{{ item.mahp.ten_hp }}</td>
+
+                      <td>{{ item.mahp.so_tc }}</td>
+                      <td>{{ item.mahp.so_tiet_lt }}</td>
+                      <td>{{ item.mahp.so_tiet_th }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}
