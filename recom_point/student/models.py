@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
+
 def convert_diem_so_thanh_diem_chu(diem):
     if diem >= 8.5:
         return 'A'
@@ -43,6 +44,7 @@ class SinhVien(AbstractUser):
     email = models.CharField(max_length=255)
     lop = models.ForeignKey(Lop, on_delete=models.CASCADE, null=True, blank=True)
 
+
 class HocPhan(models.Model):
     ten_hp = models.CharField(max_length=255)
     so_tc = models.IntegerField(default=0)
@@ -67,3 +69,9 @@ class Diem(models.Model):
     @property
     def get_diem_chu(self):
         return convert_diem_so_thanh_diem_chu(self.diem)
+
+
+class KeHoachHocTapPerson(models.Model):
+    sinhvien = models.ForeignKey(SinhVien, on_delete=models.CASCADE)
+    hocphan = models.ForeignKey(HocPhan, on_delete=models.CASCADE)
+    hocky = models.IntegerField(default=0)

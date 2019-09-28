@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from student.views import (
     IndexView, LoginView, XemDiemDuDoanView,
-    XemChuongTrinhDaoTao, XemDiemView
+    XemChuongTrinhDaoTao, XemDiemView, ThemKeHoachHocTapCaNhan
 )
 
 urlpatterns = [
@@ -25,6 +25,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('login/', LoginView.as_view(), name='login'),
     path('chuongtrinhdaotao/', XemChuongTrinhDaoTao.as_view(), name='ctdaotao'),
+    path('kehoachhoctapcanhan/', ThemKeHoachHocTapCaNhan.as_view(), name='kehoachhoctapcanhan'),
     path('xemdiemthi/', XemDiemView.as_view(), name='xemdiemthi'),
     path('xemdiem/', XemDiemDuDoanView.as_view(), name='xemdiem')
 ]

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import ChuongTrinhDaoTao, Diem
+from .models import ChuongTrinhDaoTao, Diem, KeHoachHocTapPerson, HocPhan
 # Create your views here.
 
 
@@ -33,7 +33,10 @@ class LoginView(View):
 class XemDiemDuDoanView(View):
 
     def get(self, request):
-        return render(request, 'xemdiemdudoan.html')
+        context = {
+            'data': ''
+        }
+        return render(request, 'xemdiemdudoan.html', context)
 
 
 class XemChuongTrinhDaoTao(View):
@@ -57,3 +60,26 @@ class XemDiemView(View):
             'data': data
         }
         return render(request, 'xemdiem.html', context)
+
+
+class ThemKeHoachHocTapCaNhan(View):
+
+    def get(self, request):
+        user = request.user
+        get_private_plan = KeHoachHocTapPerson.objects.filter(sinhvien=user)
+        nganhh = request.user.lop.nganh
+        list_hocphan = ChuongTrinhDaoTao.objects.filter(manganh=nganhh)
+        context = {
+            'data': get_private_plan,
+            'list_hocphan': list_hocphan
+        }
+        return render(request, 'kehoachhoctapcanhan.html', context)
+
+    def post(self, request):
+        hocky = request.POST['hocky']
+        hocphan = request.POST['hocphan']
+        hocph = HocPhan.objects.get(id=hocphan)
+        KeHoachHocTapPerson.objects.create(
+            sinhvien=request.user, hocky=hocky, hocphan=hocph)
+        return redirect('kehoachhoctapcanhan')
+
