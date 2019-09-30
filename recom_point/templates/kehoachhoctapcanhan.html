@@ -72,10 +72,11 @@
                   <tbody>
                   {% for item in data %}
                     <tr>
-                        <td></td>
+                        <td>{{ forloop.counter }}</td>
+                         <td>{{ item.hocky }}</td>
                         <td>{{ item.hocphan.ten_hp }}</td>
                         <td>{{ item.hocphan.so_tc }}</td>
-                        <td>{{ item.hocky }}</td>
+
 
                     </tr>
                   {% endfor %}

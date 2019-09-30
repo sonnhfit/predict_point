@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import ChuongTrinhDaoTao, Diem, KeHoachHocTapPerson, HocPhan
+from .tasks import get_diem_from_user_and_mhp, predict_score
 # Create your views here.
 
 
@@ -33,8 +34,33 @@ class LoginView(View):
 class XemDiemDuDoanView(View):
 
     def get(self, request):
+        nganh = request.user.lop.nganh
+        list_hp = ChuongTrinhDaoTao.objects.filter(manganh=nganh )
+        print(list_hp)
+        point = ['A', 'B', 'C', 'D', 'E', 'F']
+        listresult = []
+        list_recommend = []
+        for item in list_hp:
+            data = {}
+            data['tenhp'] = item.mahp.ten_hp
+            data['lhp'] = 'Tự chọn' if item.tuchon == True else 'Bắt buộc'
+            data['diem'] = get_diem_from_user_and_mhp(request.user, item.mahp )
+            if data['diem'] == '_' or data['diem'] == 'F':
+                get_predict = predict_score(user_id=request.user.id)
+                data['diemdd'] =  get_predict
+                subdata = {}
+                subdata['tenhp'] = item.mahp.ten_hp
+                subdata['lhp'] = 'Tự chọn' if item.tuchon == True else 'Bắt buộc'
+                list_recommend.append(subdata)
+            else:
+                data['diemdd'] = ''
+
+            listresult.append(data)
+
+
         context = {
-            'data': ''
+            'data': listresult,
+            'recom': list_recommend
         }
         return render(request, 'xemdiemdudoan.html', context)
 

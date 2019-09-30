@@ -26,16 +26,64 @@
                   <thead>
                     <tr>
                       <th>STT</th>
-                      <th>Học kỳ</th>
-                      <th>Học phần</th>
-                      <th>Điểm số</th>
-                      <th>Điểm chữ</th>
+                      <th>Tên học phần</th>
+                      <th>Điểm</th>
+                      <th>Điểm Dự đoán</th>
+                      <th>Loại học phần</th>
                     </tr>
                   </thead>
                   <tbody>
                   {% for item in data %}
                     <tr>
-                        <td></td>
+                      <td></td>
+                        <td>{{ item.tenhp }}</td>
+                      <td>{{ item.diem }}</td>
+                      <td>{{ item.diemdd }}</td>
+                      <td> {{ item.lhp }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Môn học gợi ý
+                </h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Tên học phần</th>
+                      <th>Loại học phần</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in recom %}
+                    <tr>
+                      <td></td>
+                      <td>{{ item.tenhp }}</td>
+                      <td> {{ item.lhp }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>

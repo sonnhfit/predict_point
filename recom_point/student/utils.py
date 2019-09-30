@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy import sparse
+import pickle
+
+# obj0, obj1, obj2 are created here...
+
+# Saving the objects:
 
 
 
@@ -199,4 +204,7 @@ rs = BMF(Y_data=rate_train, K = 10, lam = .1, print_every = 10,
     learning_rate = 0.75, max_iter = 100, user_based = 1)
 rs.fit()
 
-print(rs.pred_for_user(1))
+with open('objs.pkl', 'wb') as f:
+    pickle.dump(rs, f)
+# print(rs.pred_for_user(1))
+print('oke')
