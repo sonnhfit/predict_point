@@ -4,7 +4,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import ChuongTrinhDaoTao, Diem, KeHoachHocTapPerson, HocPhan
-from .tasks import get_diem_from_user_and_mhp, predict_score
+from .tasks import get_diem_from_user_and_mhp, ps
 # Create your views here.
 
 
@@ -46,7 +46,7 @@ class XemDiemDuDoanView(View):
             data['lhp'] = 'Tự chọn' if item.tuchon == True else 'Bắt buộc'
             data['diem'] = get_diem_from_user_and_mhp(request.user, item.mahp )
             if data['diem'] == '_' or data['diem'] == 'F':
-                get_predict = predict_score(user_id=request.user.id)
+                get_predict = ps(user_id=request.user.id)
                 data['diemdd'] =  get_predict
                 subdata = {}
                 subdata['tenhp'] = item.mahp.ten_hp

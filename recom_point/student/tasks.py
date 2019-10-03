@@ -20,7 +20,8 @@ def convert_diem_so_thanh_diem_chu(diem):
     if diem < 5:
         return 'F'
 
-def predict_score(user_id):
+
+def ps(user_id):
     with open(settings.BASE_DIR + '/student/objs.pkl', 'rb') as f:
         try:
             rs = pickle.load(f)
