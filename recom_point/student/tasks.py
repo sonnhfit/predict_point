@@ -28,10 +28,13 @@ def predict_score(user_id):
         except:
             pass
 
-    diem = Diem.objects.filter(sinhvien_id=user_id).first()
-    data = diem.diem
-
-
+    diem = Diem.objects.filter(sinhvien_id=user_id)
+    summ = 0
+    co = 0
+    for it in diem:
+        summ += it.diem
+        co += 1
+    data = summ/co
     return convert_diem_so_thanh_diem_chu(data)
 
 
